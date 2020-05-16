@@ -11,10 +11,11 @@ namespace TF_PSA.PL
         public DbSet<Item> Itens { get; set; }
         public DbSet<Lance> Lances { get; set; }
         public DbSet<Leilao> Leiloes { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-           .UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=DBMovieCF;Trusted_Connection=True;");
+           .UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=LeilaoOfMyHeart;Trusted_Connection=True;");
         }
     }
 }

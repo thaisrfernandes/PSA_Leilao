@@ -4,10 +4,14 @@ using System.Text;
 
 namespace TF_PSA.PL
 {
-    public enum Categoria
+    public enum CategoriaEnum
     {
-        Eletronico,
         Eletrodomestico,
+        Eletronico,
+        Vestuario,
+        Higiene,
+        Esporte,
+        Lazer,
         Movel,
     }
 }

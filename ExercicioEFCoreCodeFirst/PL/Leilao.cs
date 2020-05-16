@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TF_PSA.PL
 {
-    public abstract class Leilao
+    public class Leilao
     {
         public int LeilaoId { get; set; }
         public bool LanceAberto { get; set; }
@@ -14,9 +14,17 @@ namespace TF_PSA.PL
         public ICollection<Item> Lote { get; set; }
         public ICollection<Lance> Lances { get; set; }
 
-        public abstract void novoLance(double Valor, String EmailResponsavel);
-        
+        public void novoLanceOferta(double Valor, String EmailResponsavel)
+        {
+
+        }
+
+        public void novoLanceDemanda(double Valor, String EmailResponsavel)
+        {
+
+        }
+
         //implementar: abrirleilao, fecharleilao, getLances(depende do bool LanceAberto), 
-       
+
     }
 }

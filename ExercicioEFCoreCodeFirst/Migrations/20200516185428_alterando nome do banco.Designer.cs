@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TF_PSA.PL;
 
 namespace TF_PSA.Migrations
 {
     [DbContext(typeof(LeilaoContext))]
-    partial class LeilaoContextModelSnapshot : ModelSnapshot
+    [Migration("20200516185428_alterando nome do banco")]
+    partial class alterandonomedobanco
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,14 +37,8 @@ namespace TF_PSA.Migrations
                     b.Property<string>("DescricaoCompleta")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Imagem")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<int?>("LeilaoId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ItemId");
 
