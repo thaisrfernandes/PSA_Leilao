@@ -26,7 +26,7 @@ namespace TF_PSA
                 LeilaoContext context = new LeilaoContext();
 
                 var usuarios = from c in context.Usuarios
-                             select c.Nome;
+                               select c.Nome;
 
                 Console.WriteLine(" ");
                 Console.WriteLine("Usuarios registrados: ");
@@ -45,7 +45,7 @@ namespace TF_PSA
 
                 #region ConsultaItens
                 var itens = from i in context.Itens
-                               select i.Nome;
+                            select i.Nome;
 
                 Console.WriteLine(" ");
                 Console.WriteLine("Itens registrados: ");
@@ -54,10 +54,48 @@ namespace TF_PSA
                     Console.WriteLine(item);
                 }
 
-                Console.ReadKey();
+
                 #endregion
 
-               
+                #region LancesSeeding
+                if (db.Lances.Count() == 0)
+                {
+                    SeedLances(db);
+                }
+                #endregion
+
+                #region ConsultaLances
+                var lances = from l in context.Lances
+                             select l.EmailUsuario;
+
+                Console.WriteLine(" ");
+                Console.WriteLine("Lances registrados: ");
+                foreach (String lance in lances)
+                {
+                    Console.WriteLine(lance);
+                }
+                #endregion
+
+                #region LeiloesSeeding
+                if (db.Leiloes.Count() == 0)
+                {
+                    SeedLeiloes(db);
+                }
+                #endregion
+
+                #region ConsultaLeiloes
+                var leiloes = from l in context.Leiloes
+                             select l.IdUsuarioResponsavel;
+
+                Console.WriteLine(" ");
+                Console.WriteLine("Leiloes registrados: ");
+                foreach (String leilao in leiloes)
+                {
+                    Console.WriteLine(leilao);
+                }
+
+                Console.ReadKey();
+                #endregion
             }
         }
 
@@ -65,8 +103,8 @@ namespace TF_PSA
         private static void SeedUsuarios(LeilaoContext context)
         {
 
-            List<Usuario> usuarios = new List<Usuario> 
-            { 
+            List<Usuario> usuarios = new List<Usuario>
+            {
                 new Usuario
                 {
                     UsuarioId = "97974378827",
@@ -224,6 +262,161 @@ namespace TF_PSA
 
             Console.WriteLine("Itens salvos");
         }
-    }
 
+        private static void SeedLances(LeilaoContext context)
+        {
+            List<Lance> lances = new List<Lance>
+            {
+                new Lance
+                {
+                    
+                    Data = new DateTime(2020, 5, 15, 17, 47, 0),
+                    Valor = 200,
+                    EmailUsuario = "marina.moreira@edu.pucrs.br",
+                    LeilaoId = 4
+                },
+                new Lance
+                {
+                    
+                    Data = new DateTime(2020, 5, 15, 17, 57, 0),
+                    Valor = 212,
+                    EmailUsuario = "thais.fernandes@edu.pucrs.br",
+                    LeilaoId = 4
+                },
+
+                new Lance
+                {
+                    
+                    Data = new DateTime(2020, 5, 16, 10, 10, 0),
+                    Valor = 1000,
+                    EmailUsuario = "felipe.fahrion@edu.pucrs.br",
+                    LeilaoId = 5
+                },
+                new Lance
+                {
+                    
+                    Data = new DateTime(2020, 5, 16, 10, 19, 0),
+                    Valor = 1115,
+                    EmailUsuario = "bruno.abbad@edu.pucrs.br",
+                    LeilaoId = 5
+                },
+
+                new Lance
+                {
+                    
+                    Data = new DateTime(2020, 5, 17, 20, 35, 0),
+                    Valor = 515,
+                    EmailUsuario = "arthur.maciel@edu.pucrs.br",
+                    LeilaoId = 6
+                },
+                new Lance
+                {
+                    
+                    Data = new DateTime(2020, 5, 17, 20, 46, 0),
+                    Valor = 700,
+                    EmailUsuario = "marina.moreira@edu.pucrs.br",
+                    LeilaoId = 6
+                },
+            };
+
+            context.Lances.AddRange(lances);
+            context.SaveChanges();
+
+        }
+
+        private static void SeedLeiloes(LeilaoContext context)
+        {
+            var lote1 = new List<Item>();
+            var lote2 = new List<Item>();
+            var lote3 = new List<Item>();
+
+            var itens = from i in context.Itens
+                           where i.ItemId < 17
+                           select i;
+
+            lote1.AddRange(itens);
+
+            //----------------------------------------
+
+            itens = from i in context.Itens
+                        where i.ItemId >= 17  && i.ItemId < 19
+                        select i;
+
+            lote2.AddRange(itens);
+
+            //----------------------------------------
+
+            itens = from i in context.Itens
+                    where i.ItemId >= 19 && i.ItemId < 21
+                    select i;
+
+            lote3.AddRange(itens);
+
+            //----------------------------------------
+
+            var lance1 = new List<Lance>();
+            var lance2 = new List<Lance>();
+            var lance3 = new List<Lance>();
+
+            var lances = from l in context.Lances
+                        where l.LanceId < 3
+                        select l;
+
+            lance1.AddRange(lances);
+
+            //----------------------------------------
+
+            lances = from l in context.Lances
+                     where l.LanceId >= 3 && l.LanceId < 4
+                     select l;
+
+            lance2.AddRange(lances);
+
+            //----------------------------------------
+
+            lances = from l in context.Lances
+                     where l.LanceId >= 4 && l.LanceId < 6
+                     select l;
+
+            lance3.AddRange(lances);
+
+            //----------------------------------------
+
+            List<Leilao> leiloes = new List<Leilao>
+            {
+                new Leilao
+                {
+                    LanceAberto = false,
+                    dataInicio = new DateTime(2020, 6, 1, 7, 47, 0),
+                    dataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
+                    IdUsuarioResponsavel = "12378589940",
+                    Lote = lote1,
+                    Lances = lance1
+                },
+                new Leilao
+                {
+                    LanceAberto = false,
+                    dataInicio = new DateTime(2020, 6, 1, 7, 47, 0),
+                    dataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
+                    IdUsuarioResponsavel = "97974378827",
+                    Lote = lote2,
+                    Lances = lance2
+                },
+                new Leilao
+                {
+                    LanceAberto = false,
+                    dataInicio = new DateTime(2020, 6, 1, 7, 47, 0),
+                    dataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
+                    IdUsuarioResponsavel = "67456378829",
+                    Lote = lote3,
+                    Lances = lance3
+                },
+            };
+
+            context.Leiloes.AddRange(leiloes);
+            context.SaveChanges();
+
+        }
+    }
 }
+ 

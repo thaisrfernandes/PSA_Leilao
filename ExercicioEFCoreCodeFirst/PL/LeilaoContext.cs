@@ -12,6 +12,10 @@ namespace TF_PSA.PL
         public DbSet<Lance> Lances { get; set; }
         public DbSet<Leilao> Leiloes { get; set; }
 
+        public LeilaoContext(DbContextOptions<LeilaoContext> options) : base(options) {}
+
+        public LeilaoContext() { }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
