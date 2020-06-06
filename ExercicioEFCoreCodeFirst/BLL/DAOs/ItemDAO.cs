@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using TF_PSA.PL;
+using System.Linq;
 
 namespace TF_PSA.BLL.DAOs
 {
@@ -22,15 +23,16 @@ namespace TF_PSA.BLL.DAOs
         }
 
         public async Task<List<Item>> ListAll() => await _context.Itens.ToListAsync();
+
         public async Task Create(Item novoItem)
         {
             _context.Add(novoItem);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Item> EditById(int ItemId) => await _context.Itens.FindAsync(ItemId);
+        public async Task<Item> EditById(int? ItemId) => await _context.Itens.FindAsync(ItemId);
 
-        public async Task<Item> GetItem(int ItemId) => await _context.Itens.FirstOrDefaultAsync(i => i.ItemId == ItemId);
+        public async Task<Item> GetItem(int? ItemId) => await _context.Itens.FirstOrDefaultAsync(i => i.ItemId == ItemId);
 
         public async Task DeleteById(int ItemId)
         {
@@ -38,5 +40,13 @@ namespace TF_PSA.BLL.DAOs
             _context.Itens.Remove(item);
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdateItem(Item item)
+        {
+           _context.Update(item);
+            await _context.SaveChangesAsync();
+        }
+
+        public bool ItemExits(int id) => _context.Itens.Any(e => e.ItemId == id);
     }
 }

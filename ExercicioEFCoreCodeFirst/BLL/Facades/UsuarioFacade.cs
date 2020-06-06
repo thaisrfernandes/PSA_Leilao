@@ -17,9 +17,11 @@ namespace TF_PSA.BLL.Facades
         }
 
         public Task<List<Usuario>> ListAllUsuarios() => UsuarioDAO.ListAll();
-        public Task<Usuario> EditUsuario(String Email) => UsuarioDAO.EditById(Email);
-        public Task<Usuario> GetUsuario(String Email) => UsuarioDAO.GetUsuario(Email);
+        public Task<Usuario> EditUsuario(String id) => UsuarioDAO.EditById(id);
+        public Task<Usuario> GetUsuario(String id) => UsuarioDAO.GetUsuario(id);
         public async Task CreateUsuario(Usuario NovoUsuario) => await UsuarioDAO.Create(NovoUsuario);
         public async Task DeleteUsuarioById(String Email) => await UsuarioDAO.DeleteById(Email);
+        public async Task UpdateUsuario(Usuario usuario) => await UsuarioDAO.UpdateUsuario(usuario);
+        public bool UsuarioExits(string id) => UsuarioDAO.UsuarioExits(id);
     }
 }

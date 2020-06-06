@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TF_PSA.PL;
 
 namespace TF_PSA.Migrations
 {
     [DbContext(typeof(LeilaoContext))]
-    partial class LeilaoContextModelSnapshot : ModelSnapshot
+    [Migration("20200525233408_correção context e itens")]
+    partial class correçãocontexteitens
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +35,7 @@ namespace TF_PSA.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DescricaoCompleta")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Imagem")
                         .HasColumnType("varbinary(max)");
@@ -44,9 +44,7 @@ namespace TF_PSA.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ItemId");
 
@@ -110,21 +108,10 @@ namespace TF_PSA.Migrations
                     b.Property<string>("UsuarioId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Cnpj")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Cpf")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefone")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UsuarioId");

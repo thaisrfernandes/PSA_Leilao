@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using TF_PSA.PL;
 using System.Threading.Tasks;
-
+using System.Linq;
 
 namespace TF_PSA.BLL.DAOs
 {
@@ -29,9 +29,9 @@ namespace TF_PSA.BLL.DAOs
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Usuario> EditById(String Email) => await _context.Usuarios.FindAsync(Email);
+        public async Task<Usuario> EditById(String id) => await _context.Usuarios.FindAsync(id);
 
-        public async Task<Usuario> GetUsuario(String Email) => await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == Email);
+        public async Task<Usuario> GetUsuario(String id) => await _context.Usuarios.FirstOrDefaultAsync(u => u.UsuarioId.Equals(id));
         
         public async Task DeleteById(String Email)
         {
@@ -39,5 +39,13 @@ namespace TF_PSA.BLL.DAOs
             _context.Usuarios.Remove(Usuario);
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdateUsuario(Usuario usuario)
+        {
+            _context.Update(usuario);
+            await _context.SaveChangesAsync();
+        }
+
+        public bool UsuarioExits(string id) => _context.Usuarios.Any(e => e.UsuarioId.Equals(id));
     }   
 }

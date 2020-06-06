@@ -13,6 +13,6 @@ namespace LeilaoOfMyHeart.Data
             : base(options)
         {
         }
-        public DbSet<TF_PSA.PL.Item> Item { get; set; }
+        //public DbSet<TF_PSA.PL.Item> Item { get; set; }
     }
 }

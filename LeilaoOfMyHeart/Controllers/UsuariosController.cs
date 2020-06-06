@@ -5,91 +5,90 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LeilaoOfMyHeart.Data;
-using TF_PSA.PL;
 using TF_PSA.BLL.Facades;
+using TF_PSA.PL;
 
 namespace LeilaoOfMyHeart.Controllers
 {
-    public class ItemsController : Controller
+    public class UsuariosController : Controller
     {
-        private readonly ItemFacade _facade;
+        private readonly UsuarioFacade _facade;
 
-        public ItemsController()
+        public UsuariosController()
         {
-            _facade = new ItemFacade();
+            _facade = new UsuarioFacade();
         }
 
-        // GET: Items
+        // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            return View(await _facade.ListAllItens());
+            return View(await _facade.ListAllUsuarios());
         }
 
-        // GET: Items/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Usuarios/Details/5
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var item = await _facade.GetItem(id);
+            var usuario = await _facade.GetUsuario(id);
 
-            if (item == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(usuario);
         }
 
-        // GET: Items/Create
+        // GET: Usuarios/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Items/Create
+        // POST: Usuarios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ItemId,Nome,DescricaoBreve,DescricaoCompleta,Categoria,Imagem")] Item item)
+        public async Task<IActionResult> Create([Bind("UsuarioId,Nome,Email,Cpf,Cnpj,Telefone")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                await _facade.CreateItem(item);
+                await _facade.CreateUsuario(usuario);
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(usuario);
         }
 
-        // GET: Items/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Usuarios/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var item = await _facade.EditItem(id);
+            var usuario = await _facade.EditUsuario(id);
 
-            if (item == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
-            return View(item);
+            return View(usuario);
         }
 
-        // POST: Items/Edit/5
+        // POST: Usuarios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ItemId,Nome,DescricaoBreve,DescricaoCompleta,Categoria,Imagem")] Item item)
+        public async Task<IActionResult> Edit(string id, [Bind("UsuarioId,Nome,Email,Cpf,Cnpj,Telefone")] Usuario usuario)
         {
-            if (id != item.ItemId)
+            if (id != usuario.UsuarioId)
             {
                 return NotFound();
             }
@@ -98,11 +97,11 @@ namespace LeilaoOfMyHeart.Controllers
             {
                 try
                 {
-                    await _facade.UpdateItem(item);
+                    await _facade.UpdateUsuario(usuario);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemExists(item.ItemId))
+                    if (!UsuarioExists(usuario.UsuarioId))
                     {
                         return NotFound();
                     }
@@ -113,39 +112,39 @@ namespace LeilaoOfMyHeart.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(usuario);
         }
 
-        // GET: Items/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Usuarios/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var item = await _facade.GetItem(id);
+            var usuario = await _facade.GetUsuario(id);
 
-            if (item == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(usuario);
         }
 
-        // POST: Items/Delete/5
+        // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            await _facade.DeleteItemById(id);
+            await _facade.DeleteUsuarioById(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ItemExists(int id)
+        private bool UsuarioExists(string id)
         {
-            return _facade.ItemExits(id);
+            return _facade.UsuarioExits(id);
         }
     }
 }
