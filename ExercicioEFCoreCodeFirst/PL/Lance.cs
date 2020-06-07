@@ -11,5 +11,6 @@ namespace TF_PSA.PL
         public double Valor { get; set; }
         public String EmailUsuario { get; set; }
         public int LeilaoId { get; set; }
+        public Leilao Leilao { get; set; }
     }
 }

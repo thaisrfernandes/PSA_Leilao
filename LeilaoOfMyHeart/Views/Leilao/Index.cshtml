@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TF_PSA.PL.Leilao>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LanceAberto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataFinal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuarioResponsavel)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LanceAberto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataFinal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUsuarioResponsavel)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.LeilaoId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.LeilaoId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.LeilaoId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

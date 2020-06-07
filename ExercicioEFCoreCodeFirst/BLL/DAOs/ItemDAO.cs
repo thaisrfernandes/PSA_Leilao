@@ -43,7 +43,7 @@ namespace TF_PSA.BLL.DAOs
 
         public async Task UpdateItem(Item item)
         {
-           _context.Update(item);
+            _context.Update(item);
             await _context.SaveChangesAsync();
         }
 
