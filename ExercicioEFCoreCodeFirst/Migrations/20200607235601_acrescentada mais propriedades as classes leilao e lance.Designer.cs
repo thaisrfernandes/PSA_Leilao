@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TF_PSA.PL;
 
 namespace TF_PSA.Migrations
 {
     [DbContext(typeof(LeilaoContext))]
-    partial class LeilaoContextModelSnapshot : ModelSnapshot
+    [Migration("20200607235601_acrescentada mais propriedades as classes leilao e lance")]
+    partial class acrescentadamaispropriedadesasclassesleilaoelance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,17 +73,12 @@ namespace TF_PSA.Migrations
                     b.Property<int>("LeilaoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<double>("Valor")
                         .HasColumnType("float");
 
                     b.HasKey("LanceId");
 
                     b.HasIndex("LeilaoId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Lances");
                 });
@@ -157,10 +154,6 @@ namespace TF_PSA.Migrations
                         .HasForeignKey("LeilaoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("TF_PSA.PL.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId");
                 });
 #pragma warning restore 612, 618
         }

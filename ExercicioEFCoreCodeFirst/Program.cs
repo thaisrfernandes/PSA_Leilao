@@ -386,27 +386,27 @@ namespace TF_PSA
             {
                 new Leilao
                 {
-                    LanceAberto = false,
-                    dataInicio = new DateTime(2020, 6, 1, 7, 47, 0),
-                    dataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
+                    CategoriaDeLance = TipoLance.Aberto,
+                    DataInicio = new DateTime(2020, 6, 1, 7, 47, 0),
+                    DataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
                     IdUsuarioResponsavel = "12378589940",
                     Lote = lote1,
                     Lances = lance1
                 },
                 new Leilao
                 {
-                    LanceAberto = false,
-                    dataInicio = new DateTime(2020, 6, 1, 7, 47, 0),
-                    dataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
+                    CategoriaDeLance = TipoLance.Fechado,
+                    DataInicio = new DateTime(2020, 6, 1, 7, 47, 0),
+                    DataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
                     IdUsuarioResponsavel = "97974378827",
                     Lote = lote2,
                     Lances = lance2
                 },
                 new Leilao
                 {
-                    LanceAberto = false,
-                    dataInicio = new DateTime(2020, 6, 1, 7, 47, 0),
-                    dataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
+                    CategoriaDeLance = TipoLance.Aberto,
+                    DataInicio = new DateTime(2020, 6, 1, 7, 47, 0),
+                    DataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
                     IdUsuarioResponsavel = "67456378829",
                     Lote = lote3,
                     Lances = lance3

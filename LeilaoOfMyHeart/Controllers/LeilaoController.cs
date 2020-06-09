@@ -54,7 +54,7 @@ namespace LeilaoOfMyHeart.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LeilaoId,LanceAberto,dataInicio,dataFinal,IdUsuarioResponsavel")] Leilao leilao)
+        public async Task<IActionResult> Create([Bind("LeilaoId,Categoria,CategoriaDeLance,Preco,DataInicio,DataFinal,IdUsuarioResponsavel")] Leilao leilao)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace LeilaoOfMyHeart.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LeilaoId,LanceAberto,dataInicio,dataFinal,IdUsuarioResponsavel")] Leilao leilao)
+        public async Task<IActionResult> Edit(int id, [Bind("LeilaoId,Categoria,CategoriaDeLance,Preco,DataInicio,DataFinal,IdUsuarioResponsavel")] Leilao leilao)
         {
             if (id != leilao.LeilaoId)
             {
@@ -145,6 +145,13 @@ namespace LeilaoOfMyHeart.Controllers
         private bool LeilaoExists(int id)
         {
             return _facade.LeilaoExits(id);
+        }
+
+        public async Task<IActionResult> SelecionaGanhador(Leilao leilao)
+        {
+            Lance lance = await _facade.DeterminaGanhador(leilao);
+
+            return View(lance);
         }
     }
 }

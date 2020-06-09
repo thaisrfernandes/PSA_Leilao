@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TF_PSA.BLL.DAOs;
@@ -16,6 +18,7 @@ namespace TF_PSA.BLL.Facades
             LeilaoDAO = new LeilaoDAO();
         }
 
+        public LeilaoContext GetContext() => LeilaoDAO.GetContext();
         public Task<List<Leilao>> ListAllLeiloes() => LeilaoDAO.ListAll();
         public Task<Leilao> EditLeilao(int? LeilaoId) => LeilaoDAO.EditById(LeilaoId);
         public Task<Leilao> GetLeilao(int? LeilaoId) => LeilaoDAO.GetLeilao(LeilaoId);
@@ -24,6 +27,29 @@ namespace TF_PSA.BLL.Facades
         public async Task UpdateLeilao(Leilao leilao) => await LeilaoDAO.UpdateLeilao(leilao);
         public bool LeilaoExits(int id) => LeilaoDAO.LeilaoExits(id);
 
+        public async Task<Lance> DeterminaGanhador(Leilao leilao)
+        {
+            if (leilao.Categoria.ToString().Equals("Demanda"))
+            {
+                Lance lanceGanhador = GetContext().Lances.Include(l => l.Leilao)
+                    .Include(l => l.Usuario)
+                    .Where(l => l.Valor > leilao.Preco)
+                    .Where(l => l.Valor == leilao.Lances.Max<Lance>(z => z.Valor))
+                    .FirstOrDefault();
+
+                return lanceGanhador;
+            }
+            else
+            {
+                Lance lanceGanhador = GetContext().Lances.Include(l => l.Leilao)
+                    .Include(l => l.Usuario)
+                    .Where(l => l.Valor < leilao.Preco)
+                    .Where(l => l.Valor == leilao.Lances.Min<Lance>(z => z.Valor))
+                    .FirstOrDefault();
+
+                return lanceGanhador;
+            }
+        }
     }
 }
 

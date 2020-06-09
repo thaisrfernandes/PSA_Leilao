@@ -11,22 +11,22 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LanceAberto)
+            @Html.DisplayNameFor(model => model.CategoriaDeLance)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LanceAberto)
+            @Html.DisplayFor(model => model.CategoriaDeLance)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.dataInicio)
+            @Html.DisplayNameFor(model => model.DataInicio)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.dataInicio)
+            @Html.DisplayFor(model => model.DataInicio)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.dataFinal)
+            @Html.DisplayNameFor(model => model.DataFinal)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.dataFinal)
+            @Html.DisplayFor(model => model.DataFinal)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdUsuarioResponsavel)
@@ -37,6 +37,7 @@
     </dl>
 </div>
 <div>
+    <a asp-action="SelecionaGanhador" asp-route-id="@Model">SelecionaGanhador</a>
     <a asp-action="Edit" asp-route-id="@Model.LeilaoId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

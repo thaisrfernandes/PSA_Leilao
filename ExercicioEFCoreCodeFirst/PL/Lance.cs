@@ -10,6 +10,7 @@ namespace TF_PSA.PL
         public int LanceId { get; set; }
         public double Valor { get; set; }
         public String EmailUsuario { get; set; }
+        public Usuario Usuario { get; set; }
         public int LeilaoId { get; set; }
         public Leilao Leilao { get; set; }
     }

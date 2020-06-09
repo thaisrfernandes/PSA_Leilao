@@ -13,16 +13,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.LanceAberto)
+                @Html.DisplayNameFor(model => model.Categoria)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dataInicio)
+                @Html.DisplayNameFor(model => model.CategoriaDeLance)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dataFinal)
+                @Html.DisplayNameFor(model => model.DataInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataFinal)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdUsuarioResponsavel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Preco)
             </th>
             <th></th>
         </tr>
@@ -31,16 +37,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.LanceAberto)
+                @Html.DisplayFor(modelItem => item.Categoria)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.dataInicio)
+                @Html.DisplayFor(modelItem => item.CategoriaDeLance)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.dataFinal)
+                @Html.DisplayFor(modelItem => item.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFinal)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdUsuarioResponsavel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preco)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.LeilaoId">Edit</a> |
