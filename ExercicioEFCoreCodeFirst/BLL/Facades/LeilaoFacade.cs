@@ -31,8 +31,7 @@ namespace TF_PSA.BLL.Facades
         {
             if (leilao.Categoria.ToString().Equals("Demanda"))
             {
-                Lance lanceGanhador = GetContext().Lances.Include(l => l.Leilao)
-                    .Include(l => l.Usuario)
+                Lance lanceGanhador = GetContext().Lances                    
                     .Where(l => l.Valor > leilao.Preco)
                     .Where(l => l.Valor == leilao.Lances.Max<Lance>(z => z.Valor))
                     .FirstOrDefault();
@@ -41,10 +40,9 @@ namespace TF_PSA.BLL.Facades
             }
             else
             {
-                Lance lanceGanhador = GetContext().Lances.Include(l => l.Leilao)
-                    .Include(l => l.Usuario)
-                    .Where(l => l.Valor < leilao.Preco)
-                    .Where(l => l.Valor == leilao.Lances.Min<Lance>(z => z.Valor))
+                Lance lanceGanhador = GetContext().Lances
+                    .Where(l => l.Valor > leilao.Preco)
+                    .Where(l => l.Valor == leilao.Lances.Max<Lance>(z => z.Valor))
                     .FirstOrDefault();
 
                 return lanceGanhador;
