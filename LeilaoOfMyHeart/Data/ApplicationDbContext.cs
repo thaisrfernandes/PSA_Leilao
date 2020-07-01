@@ -14,5 +14,10 @@ namespace LeilaoOfMyHeart.Data
         {
         }
         //public DbSet<TF_PSA.PL.Item> Item { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
     }
 }

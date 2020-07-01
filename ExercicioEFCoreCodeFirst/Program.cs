@@ -57,6 +57,29 @@ namespace TF_PSA
 
                 #endregion
 
+                
+
+                #region LeiloesSeeding
+                if (db.Leiloes.Count() == 0)
+                {
+                    SeedLeiloes(db);
+                }
+
+                #endregion
+
+                #region ConsultaLeiloes
+                var leiloes = from l in context.Leiloes
+                             select l.IdUsuarioResponsavel;
+
+                Console.WriteLine(" ");
+                Console.WriteLine("Leiloes registrados: ");
+                foreach (String leilao in leiloes)
+                {
+                    Console.WriteLine(leilao);
+                }
+
+                #endregion
+
                 #region LancesSeeding
                 if (db.Lances.Count() == 0)
                 {
@@ -76,26 +99,8 @@ namespace TF_PSA
                 }
                 #endregion
 
-                #region LeiloesSeeding
-                if (db.Leiloes.Count() == 0)
-                {
-                    SeedLeiloes(db);
-                }
-                #endregion
-
-                #region ConsultaLeiloes
-                var leiloes = from l in context.Leiloes
-                             select l.IdUsuarioResponsavel;
-
-                Console.WriteLine(" ");
-                Console.WriteLine("Leiloes registrados: ");
-                foreach (String leilao in leiloes)
-                {
-                    Console.WriteLine(leilao);
-                }
-
                 Console.ReadKey();
-                #endregion
+
             }
         }
 
@@ -269,53 +274,47 @@ namespace TF_PSA
             {
                 new Lance
                 {
-                    
                     Data = new DateTime(2020, 5, 15, 17, 47, 0),
                     Valor = 200,
                     EmailUsuario = "marina.moreira@edu.pucrs.br",
-                    LeilaoId = 4
+                    LeilaoId = 5
                 },
                 new Lance
                 {
-                    
                     Data = new DateTime(2020, 5, 15, 17, 57, 0),
                     Valor = 212,
                     EmailUsuario = "thais.fernandes@edu.pucrs.br",
-                    LeilaoId = 4
+                    LeilaoId = 5
                 },
 
                 new Lance
                 {
-                    
                     Data = new DateTime(2020, 5, 16, 10, 10, 0),
                     Valor = 1000,
                     EmailUsuario = "felipe.fahrion@edu.pucrs.br",
-                    LeilaoId = 5
+                    LeilaoId = 6
                 },
                 new Lance
                 {
-                    
                     Data = new DateTime(2020, 5, 16, 10, 19, 0),
                     Valor = 1115,
                     EmailUsuario = "bruno.abbad@edu.pucrs.br",
-                    LeilaoId = 5
+                    LeilaoId = 6
                 },
 
                 new Lance
                 {
-                    
                     Data = new DateTime(2020, 5, 17, 20, 35, 0),
                     Valor = 515,
                     EmailUsuario = "arthur.maciel@edu.pucrs.br",
-                    LeilaoId = 6
+                    LeilaoId = 7
                 },
                 new Lance
                 {
-                    
                     Data = new DateTime(2020, 5, 17, 20, 46, 0),
                     Valor = 700,
                     EmailUsuario = "marina.moreira@edu.pucrs.br",
-                    LeilaoId = 6
+                    LeilaoId = 7
                 },
             };
 
@@ -353,7 +352,7 @@ namespace TF_PSA
             lote3.AddRange(itens);
 
             //----------------------------------------
-
+            
             var lance1 = new List<Lance>();
             var lance2 = new List<Lance>();
             var lance3 = new List<Lance>();
@@ -379,9 +378,9 @@ namespace TF_PSA
                      select l;
 
             lance3.AddRange(lances);
-
+            
             //----------------------------------------
-
+            
             List<Leilao> leiloes = new List<Leilao>
             {
                 new Leilao
@@ -391,7 +390,9 @@ namespace TF_PSA
                     DataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
                     IdUsuarioResponsavel = "12378589940",
                     Lote = lote1,
-                    Lances = lance1
+                    Lances = lance1,
+                    Categoria = TipoLeilao.Demanda,
+                    Preco = 2000
                 },
                 new Leilao
                 {
@@ -400,7 +401,9 @@ namespace TF_PSA
                     DataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
                     IdUsuarioResponsavel = "97974378827",
                     Lote = lote2,
-                    Lances = lance2
+                    Lances = lance2,
+                    Categoria = TipoLeilao.Oferta,
+                    Preco = 300,
                 },
                 new Leilao
                 {
@@ -409,7 +412,9 @@ namespace TF_PSA
                     DataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
                     IdUsuarioResponsavel = "67456378829",
                     Lote = lote3,
-                    Lances = lance3
+                    Lances = lance3,
+                    Categoria = TipoLeilao.Oferta,
+                    Preco = 500,
                 },
             };
 

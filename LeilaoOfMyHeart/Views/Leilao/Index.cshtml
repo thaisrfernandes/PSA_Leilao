@@ -9,57 +9,18 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoriaDeLance)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataFinal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdUsuarioResponsavel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Preco)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categoria)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoriaDeLance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataFinal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUsuarioResponsavel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Preco)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.LeilaoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.LeilaoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.LeilaoId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="card-deck">
+    @foreach (var item in Model) {
+        <div class="w-25 card">
+            <div class="card-body">
+                <h4 class="card-title">Leilão @Html.DisplayFor(modelItem => item.LeilaoId) </h4>
+                <h6 class="card-subtitle mb-2 text-muted">por @Html.DisplayFor(modelItem => item.IdUsuarioResponsavel) em @Html.DisplayFor(modelItem => item.DataInicio)</h6>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => item.Categoria)
+                    Até  @Html.DisplayFor(modelItem => item.DataFinal.Date)
+                </p>
+            </div>
+        </div>
+    }
+</div>
+
