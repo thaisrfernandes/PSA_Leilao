@@ -26,6 +26,7 @@ namespace TF_PSA.BLL.Facades
         public async Task DeleteLeilaoById(int LeilaoId) => await LeilaoDAO.DeleteById(LeilaoId);
         public async Task UpdateLeilao(Leilao leilao) => await LeilaoDAO.UpdateLeilao(leilao);
         public bool LeilaoExits(int id) => LeilaoDAO.LeilaoExits(id);
+        public async Task PutLeilao(Leilao leilao) => await LeilaoDAO.PutLeilao(leilao);
 
         public async Task<Lance> DeterminaGanhador(Leilao leilao)
         {

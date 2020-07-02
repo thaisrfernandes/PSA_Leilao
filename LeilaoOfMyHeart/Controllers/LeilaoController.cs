@@ -12,10 +12,12 @@ namespace LeilaoOfMyHeart.Controllers
 {
     public class LeilaoController : Controller
     {
+        //private readonly LeilaosController _service;
         private readonly LeilaoFacade _facade;
 
         public LeilaoController()
         {
+            //_service = new LeilaosController();
             _facade = new LeilaoFacade();
         }
 

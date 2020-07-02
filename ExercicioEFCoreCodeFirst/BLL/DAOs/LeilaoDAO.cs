@@ -43,5 +43,11 @@ namespace TF_PSA.BLL.DAOs
             await _context.SaveChangesAsync();
         }
         public bool LeilaoExits(int id) => _context.Leiloes.Any(e => e.LeilaoId == id);
+
+        public async Task PutLeilao(Leilao leilao)
+        {
+            _context.Entry(leilao).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
     }
 }
