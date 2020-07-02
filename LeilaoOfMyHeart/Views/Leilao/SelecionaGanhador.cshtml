@@ -5,6 +5,20 @@
     ViewData["Title"] = "SelecionaGanhador";
 }
 
-<h1>Ganhador do Leilao</h1>
 
-<p>@Html.DisplayFor(model => model.LanceId)</p>
+
+@if (Model == null)
+{
+    <h1>Não foi encontrado nenhum vencedor</h1>
+}
+else
+{
+    <h1>Ganhador do Leilao</h1>
+    <div>
+        @Html.DisplayNameFor(modelItem => modelItem.LanceId): <span>@Html.DisplayFor(modelItem => modelItem.LanceId)</span>
+    </div>
+}
+
+<!--
+    <p>@Html.DisplayNameFor(@model => model.Usuario)</p>
+-->

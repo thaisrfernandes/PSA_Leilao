@@ -147,9 +147,9 @@ namespace LeilaoOfMyHeart.Controllers
             return _facade.LeilaoExits(id);
         }
 
-        public async Task<IActionResult> SelecionaGanhador(int leilaoId)
+        public async Task<IActionResult> SelecionaGanhador(Leilao leilao)
         {
-            Lance lance = await _facade.DeterminaGanhador(leilaoId);
+            Lance lance = await _facade.DeterminaGanhador(leilao);
 
             return View(lance);
         }

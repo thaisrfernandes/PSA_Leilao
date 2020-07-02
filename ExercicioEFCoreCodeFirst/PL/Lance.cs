@@ -14,5 +14,10 @@ namespace TF_PSA.PL
         public Usuario Usuario { get; set; }
         public int LeilaoId { get; set; }
         public Leilao Leilao { get; set; }
+
+        public override String ToString()
+        {
+            return LanceId + "" + EmailUsuario;
+        }
     }
 }

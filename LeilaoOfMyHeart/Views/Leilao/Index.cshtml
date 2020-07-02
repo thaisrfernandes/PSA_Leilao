@@ -19,6 +19,7 @@
                     @Html.DisplayFor(modelItem => item.Categoria)
                     Até  @Html.DisplayFor(modelItem => item.DataFinal.Date)
                 </p>
+                <a asp-action="Details" asp-route-id="@item.LeilaoId">Detalhes</a>
             </div>
         </div>
     }

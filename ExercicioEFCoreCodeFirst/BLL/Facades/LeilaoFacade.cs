@@ -27,7 +27,7 @@ namespace TF_PSA.BLL.Facades
         public async Task UpdateLeilao(Leilao leilao) => await LeilaoDAO.UpdateLeilao(leilao);
         public bool LeilaoExits(int id) => LeilaoDAO.LeilaoExits(id);
 
-        public async Task<Lance> DeterminaGanhador(int leilaoId)
+        public async Task<Lance> DeterminaGanhador(Leilao leilao)
         {
             /*
               var numberOfMoviesAsCharac = from c in db.Characters
@@ -41,24 +41,53 @@ namespace TF_PSA.BLL.Facades
 
                     int maxParticipation = numberOfMoviesAsCharac.Max(i => i.Times);
                     var chosenOne = numberOfMoviesAsCharac.First(c => c.Times == maxParticipation);
+
+
+            Lance lanceGanhador = GetContext()
+                    .Lances
+                    .Where(l => l.Valor > leilao.Preco)
+                    .FirstOrDefault();
              */
 
-            var leilao = await LeilaoDAO.GetLeilao(leilaoId);
-          
+            var leilaoId = leilao.LeilaoId;
 
-            if (leilao.Categoria.ToString().Equals("Demanda"))
+            ICollection<Lance> listaLances =  leilao.Lances;
+
+            if (TipoLeilao.Demanda == leilao.Categoria)
             {
-                Lance lanceGanhador = GetContext().Lances
-                    .Where(l => l.LeilaoId == 5 && l.Valor == 200)
+                Lance lanceGanhador = GetContext()
+                    .Lances
+                    .Where(l => l.LeilaoId == leilaoId && l.Valor < leilao.Preco)
                     .FirstOrDefault();
+
+                Console.WriteLine(lanceGanhador);
+
+                var lances = GetContext()
+                    .Lances;
+
+                foreach (Lance l in lances)
+                {
+                    Console.WriteLine(l);
+                }
 
                 return lanceGanhador;
             }
             else
             {
-                Lance lanceGanhador = GetContext().Lances
-                    .Where(l => l.LeilaoId == leilaoId && l.Valor >= leilao.Preco)
+                Lance lanceGanhador = GetContext()
+                    .Lances
+                    .Where(l => l.LeilaoId == leilaoId && l.Valor < leilao.Preco)
                     .FirstOrDefault();
+
+                Console.WriteLine(lanceGanhador);
+
+                var lances = GetContext()
+                    .Lances;
+
+                foreach (Lance l in lances)
+                {
+                    Console.WriteLine(l);
+                }
 
                 return lanceGanhador;
             }
