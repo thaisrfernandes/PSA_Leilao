@@ -35,6 +35,6 @@ namespace TF_PSA.PL
 
         [Display(Name = "Imagem do item")]
         [DataType(DataType.Text)]
-        public byte[] Imagem { get; set; }
+        public String Imagem { get; set; }
     }
 }

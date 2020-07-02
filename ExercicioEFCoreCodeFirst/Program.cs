@@ -1,9 +1,7 @@
-﻿using TF_PSA.PL;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
+using TF_PSA.PL;
 
 namespace TF_PSA
 {
@@ -20,7 +18,6 @@ namespace TF_PSA
                     SeedUsuarios(db);
                 }
                 #endregion
-
                 #region ConsultaUsuarios
 
                 LeilaoContext context = new LeilaoContext();
@@ -35,14 +32,13 @@ namespace TF_PSA
                     Console.WriteLine(usuarioNome);
                 }
                 #endregion
-
+                
                 #region ItemSeeding
                 if (db.Itens.Count() == 0)
                 {
                     SeedItens(db);
                 }
                 #endregion
-
                 #region ConsultaItens
                 var itens = from i in context.Itens
                             select i.Nome;
@@ -53,12 +49,8 @@ namespace TF_PSA
                 {
                     Console.WriteLine(item);
                 }
-
-
                 #endregion
-
                 
-
                 #region LeiloesSeeding
                 if (db.Leiloes.Count() == 0)
                 {
@@ -66,10 +58,9 @@ namespace TF_PSA
                 }
 
                 #endregion
-
                 #region ConsultaLeiloes
                 var leiloes = from l in context.Leiloes
-                             select l.IdUsuarioResponsavel;
+                              select l.IdUsuarioResponsavel;
 
                 Console.WriteLine(" ");
                 Console.WriteLine("Leiloes registrados: ");
@@ -79,14 +70,13 @@ namespace TF_PSA
                 }
 
                 #endregion
-
+                
                 #region LancesSeeding
                 if (db.Lances.Count() == 0)
                 {
                     SeedLances(db);
                 }
                 #endregion
-
                 #region ConsultaLances
                 var lances = from l in context.Lances
                              select l.EmailUsuario;
@@ -98,12 +88,10 @@ namespace TF_PSA
                     Console.WriteLine(lance);
                 }
                 #endregion
-
+                
                 Console.ReadKey();
-
             }
         }
-
 
         private static void SeedUsuarios(LeilaoContext context)
         {
@@ -114,31 +102,41 @@ namespace TF_PSA
                 {
                     UsuarioId = "97974378827",
                     Nome = "Thais",
-                    Email = "thais.fernandes@edu.pucrs.br"
+                    Email = "thais.fernandes@edu.pucrs.br",
+                    Cpf = "97974378827",
+                    Telefone = "(51) 981665664"
                 },
                 new Usuario
                 {
                     UsuarioId = "87834528750",
                     Nome = "Marina",
-                    Email = "marina.moreira@edu.pucrs.br"
+                    Email = "marina.moreira@edu.pucrs.br",
+                    Cpf = "87834528750",
+                    Telefone = "(51) 33196974"
                 },
                 new Usuario
                 {
                     UsuarioId = "67456378829",
                     Nome = "Arthur",
-                    Email = "arthur.maciel@edu.pucrs.br"
+                    Email = "arthur.maciel@edu.pucrs.br",
+                    Cpf = "67456378829",
+                    Telefone = "(51) 985632645"
                 },
                 new Usuario
                 {
                     UsuarioId = "12378589940",
                     Nome = "Felipe",
-                    Email = "felipe.fahrion@edu.pucrs.br"
+                    Email = "felipe.fahrion@edu.pucrs.br",
+                    Cpf = "12378589940",
+                    Telefone = "(51) 33184635"
                 },
                 new Usuario
                 {
                     UsuarioId = "34709567830",
                     Nome = "Bruno",
-                    Email = "bruno.abbad@edu.pucrs.br"
+                    Email = "bruno.abbad@edu.pucrs.br",
+                    Cpf = "34709567830",
+                    Telefone = "(51) 983562364"
                 },
             };
 
@@ -146,64 +144,6 @@ namespace TF_PSA
             context.SaveChanges();
 
             Console.WriteLine("Usuarios salvos");
-
-            List<Item> itens = new List<Item>
-            {
-                new Item {
-                    Nome = "Carrinho de bebê",
-                    DescricaoBreve = "Carrinho de passeio para bebê da marca Galzerano",
-                    DescricaoCompleta = "Carrinho de passeio para bebê da marca Galzerano",
-                    Categoria = CategoriaEnum.Movel,
-                    Imagem = null
-                },
-                new Item {
-                    Nome = "Banquetas",
-                    DescricaoBreve = "Banquetas para uso interno da casa. Idela em lugares com lobbys compartilhados",
-                    DescricaoCompleta = "Banquetas para uso interno da casa. Idela em lugares com lobbys compartilhados",
-                    Categoria = CategoriaEnum.Movel,
-                    Imagem = null
-                },
-                new Item {
-                    Nome = "Rélógio",
-                    DescricaoBreve = "Relógio da marca Invicta, apenas 2 meses de uso",
-                    DescricaoCompleta = "Relógio da marca Invicta, apenas 2 meses de uso",
-                    Categoria = CategoriaEnum.Movel,
-                    Imagem = null
-                },
-                new Item {
-                    Nome = "Mouse",
-                    DescricaoBreve = "Mouse wireless de Computador com entrada USB 2.0",
-                    DescricaoCompleta = "Mouse wireless de Computador com entrada USB 2.0",
-                    Categoria = CategoriaEnum.Movel,
-                    Imagem = null
-                },
-                new Item {
-                    Nome = "Livro Steve Jobs",
-                    DescricaoBreve = "A Cabeça de Steve Jobs é um livro de Marcio Edson Tavares, lançado em 2010, que retrata aspectos da vida e personalidade de Steve Jobs. Conforme sinopse da Livraria Cultura, o livro é, ao mesmo tempo, uma biografia e um guia sobre liderança",
-                    DescricaoCompleta = "A Cabeça de Steve Jobs é um livro de Marcio Edson Tavares, lançado em 2010, que retrata aspectos da vida e personalidade de Steve Jobs. Conforme sinopse da Livraria Cultura, o livro é, ao mesmo tempo, uma biografia e um guia sobre liderança",
-                    Categoria = CategoriaEnum.Movel,
-                    Imagem = null
-                },
-                new Item {
-                    Nome = "Creme de massagem drenante",
-                    DescricaoBreve = "Creme de massagem desenvolvido para auxiliar na ativação do sistema linfático, este creme com óleo de pimenta negra, termogênico de origem natural, é indicado para massagens modeladoras",
-                    DescricaoCompleta = "Creme de massagem desenvolvido para auxiliar na ativação do sistema linfático, este creme com óleo de pimenta negra, termogênico de origem natural, é indicado para massagens modeladoras",
-                    Categoria = CategoriaEnum.Movel,
-                    Imagem = null
-                },
-                new Item {
-                    Nome = "Halteres 20 kg",
-                    DescricaoBreve = "2 (dois) Halteres, bem cuidados da marca Phonex. Com um ano de garantia",
-                    DescricaoCompleta = "2 (dois) Halteres, bem cuidados da marca Phonex. Com um ano de garantia",
-                    Categoria = CategoriaEnum.Movel,
-                    Imagem = null
-                }
-            };
-
-            context.Itens.AddRange(itens);
-            context.SaveChanges();
-
-            Console.WriteLine("Itens salvos");
         }
 
         private static void SeedItens(LeilaoContext context)
@@ -212,53 +152,60 @@ namespace TF_PSA
             List<Item> itens = new List<Item>
             {
                 new Item {
+                    ItemId = 1,
                     Nome = "Carrinho de bebê",
                     DescricaoBreve = "Carrinho de passeio para bebê da marca Galzerano",
                     DescricaoCompleta = "Carrinho de passeio para bebê da marca Galzerano",
                     Categoria = CategoriaEnum.Movel,
-                    Imagem = null
+                    Imagem = "https://static.carrefour.com.br/medias/sys_master/images/images/hdb/heb/h00/h00/12050914312222.jpg"
                 },
                 new Item {
+                    ItemId = 2,
                     Nome = "Banquetas",
                     DescricaoBreve = "Banquetas para uso interno da casa. Idela em lugares com lobbys compartilhados",
                     DescricaoCompleta = "Banquetas para uso interno da casa. Idela em lugares com lobbys compartilhados",
                     Categoria = CategoriaEnum.Movel,
-                    Imagem = null
+                    Imagem = "https://www.ennecoisasdacasa.com.br/thumbs/produtos/88paula+1thumb_w800.png"
                 },
                 new Item {
+                    ItemId = 3,
                     Nome = "Rélógio",
                     DescricaoBreve = "Relógio da marca Invicta, apenas 2 meses de uso",
                     DescricaoCompleta = "Relógio da marca Invicta, apenas 2 meses de uso",
                     Categoria = CategoriaEnum.Vestuario,
-                    Imagem = null
+                    Imagem = "https://www.casasbahia-imagens.com.br/Relogios/relogiosMasculinos/relogio-masculino-analogico/14399391/1317594743/relogio-invicta-bolt-modelo-21361-dourado-azul-14399391.jpg"
                 },
                 new Item {
+                    ItemId = 4,
                     Nome = "Mouse",
                     DescricaoBreve = "Mouse wireless de Computador com entrada USB 2.0",
                     DescricaoCompleta = "Mouse wireless de Computador com entrada USB 2.0",
                     Categoria = CategoriaEnum.Eletronico,
-                    Imagem = null
+                    Imagem = "https://d1ijv31ps3i0yu.cloudfront.net/wp-content/uploads/2018/04/Mouse-Wireless-1.jpg"
                 },
                 new Item {
+                    ItemId = 5,
                     Nome = "Livro Steve Jobs",
                     DescricaoBreve = "A Cabeça de Steve Jobs é um livro de Marcio Edson Tavares, lançado em 2010, que retrata aspectos da vida e personalidade de Steve Jobs. Conforme sinopse da Livraria Cultura, o livro é, ao mesmo tempo, uma biografia e um guia sobre liderança",
                     DescricaoCompleta = "A Cabeça de Steve Jobs é um livro de Marcio Edson Tavares, lançado em 2010, que retrata aspectos da vida e personalidade de Steve Jobs. Conforme sinopse da Livraria Cultura, o livro é, ao mesmo tempo, uma biografia e um guia sobre liderança",
                     Categoria = CategoriaEnum.Lazer,
-                    Imagem = null
+                    Imagem = "https://www.oficinadanet.com.br/imagens/post/11075/td_capa-livro-a-cabeca-de-steve-jobs.jpg"
                 },
                 new Item {
+                    ItemId = 6,
                     Nome = "Creme de massagem drenante",
                     DescricaoBreve = "Creme de massagem desenvolvido para auxiliar na ativação do sistema linfático, este creme com óleo de pimenta negra, termogênico de origem natural, é indicado para massagens modeladoras",
                     DescricaoCompleta = "Creme de massagem desenvolvido para auxiliar na ativação do sistema linfático, este creme com óleo de pimenta negra, termogênico de origem natural, é indicado para massagens modeladoras",
                     Categoria = CategoriaEnum.Higiene,
-                    Imagem = null
+                    Imagem = "https://adcos.vteximg.com.br/arquivos/ids/156794-1000-1000/8397_Reduxcel-Slim-Creme-Massagem-Redutor-Plus_1kg_SITE.png?v=636027261392300000"
                 },
                 new Item {
+                    ItemId = 7,
                     Nome = "Halteres 20 kg",
                     DescricaoBreve = "2 (dois) Halteres, bem cuidados da marca Phonex. Com um ano de garantia",
                     DescricaoCompleta = "2 (dois) Halteres, bem cuidados da marca Phonex. Com um ano de garantia",
                     Categoria = CategoriaEnum.Esporte,
-                    Imagem = null
+                    Imagem = "https://http2.mlstatic.com/kit-de-halteres-20-kg-com-mala-domyos-D_NQ_NP_457601-MLB20372345182_082015-F.jpg"
                 }
             };
 
@@ -274,47 +221,53 @@ namespace TF_PSA
             {
                 new Lance
                 {
+                    LanceId = 1,
                     Data = new DateTime(2020, 5, 15, 17, 47, 0),
                     Valor = 200,
                     EmailUsuario = "marina.moreira@edu.pucrs.br",
-                    LeilaoId = 5
+                    LeilaoId = 1
                 },
                 new Lance
                 {
+                    LanceId = 2,
                     Data = new DateTime(2020, 5, 15, 17, 57, 0),
                     Valor = 212,
                     EmailUsuario = "thais.fernandes@edu.pucrs.br",
-                    LeilaoId = 5
+                    LeilaoId = 1
                 },
 
                 new Lance
                 {
+                    LanceId = 3,
                     Data = new DateTime(2020, 5, 16, 10, 10, 0),
                     Valor = 1000,
                     EmailUsuario = "felipe.fahrion@edu.pucrs.br",
-                    LeilaoId = 6
+                    LeilaoId = 2
                 },
                 new Lance
                 {
+                    LanceId = 4,
                     Data = new DateTime(2020, 5, 16, 10, 19, 0),
                     Valor = 1115,
                     EmailUsuario = "bruno.abbad@edu.pucrs.br",
-                    LeilaoId = 6
+                    LeilaoId = 2
                 },
 
                 new Lance
                 {
+                    LanceId = 5,
                     Data = new DateTime(2020, 5, 17, 20, 35, 0),
                     Valor = 515,
                     EmailUsuario = "arthur.maciel@edu.pucrs.br",
-                    LeilaoId = 7
+                    LeilaoId = 3
                 },
                 new Lance
                 {
+                    LanceId = 6,
                     Data = new DateTime(2020, 5, 17, 20, 46, 0),
                     Valor = 700,
                     EmailUsuario = "marina.moreira@edu.pucrs.br",
-                    LeilaoId = 7
+                    LeilaoId = 3
                 },
             };
 
@@ -330,89 +283,89 @@ namespace TF_PSA
             var lote3 = new List<Item>();
 
             var itens = from i in context.Itens
-                           where i.ItemId < 17
-                           select i;
+                        where i.ItemId < 3
+                        select i;
 
             lote1.AddRange(itens);
 
             //----------------------------------------
 
             itens = from i in context.Itens
-                        where i.ItemId >= 17  && i.ItemId < 19
-                        select i;
+                    where i.ItemId >= 3 && i.ItemId <= 5
+                    select i;
 
             lote2.AddRange(itens);
 
             //----------------------------------------
 
             itens = from i in context.Itens
-                    where i.ItemId >= 19 && i.ItemId < 21
+                    where i.ItemId > 5
                     select i;
 
             lote3.AddRange(itens);
 
             //----------------------------------------
-            
-            var lance1 = new List<Lance>();
-            var lance2 = new List<Lance>();
-            var lance3 = new List<Lance>();
 
-            var lances = from l in context.Lances
-                        where l.LanceId < 3
-                        select l;
+            var lances1 = new List<Lance>();
+            var lances2 = new List<Lance>();
+            var lances3 = new List<Lance>();
 
-            lance1.AddRange(lances);
+            var lances = from i in context.Lances
+                        where i.LanceId < 3
+                        select i;
 
-            //----------------------------------------
-
-            lances = from l in context.Lances
-                     where l.LanceId >= 3 && l.LanceId < 4
-                     select l;
-
-            lance2.AddRange(lances);
+            lances1.AddRange(lances);
 
             //----------------------------------------
 
-            lances = from l in context.Lances
-                     where l.LanceId >= 4 && l.LanceId < 6
-                     select l;
+            lances = from i in context.Lances
+                    where i.LanceId >= 3 && i.LanceId <= 5
+                    select i;
 
-            lance3.AddRange(lances);
-            
+            lances2.AddRange(lances);
+
             //----------------------------------------
-            
+
+            lances = from i in context.Lances
+                    where i.LanceId > 5
+                    select i;
+
+            lances3.AddRange(lances);
+
+            //----------------------------------------
+
             List<Leilao> leiloes = new List<Leilao>
             {
                 new Leilao
                 {
+                    LeilaoId = 1,
                     CategoriaDeLance = TipoLance.Aberto,
                     DataInicio = new DateTime(2020, 6, 1, 7, 47, 0),
-                    DataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
                     IdUsuarioResponsavel = "12378589940",
                     Lote = lote1,
-                    Lances = lance1,
+                    Lances = lances1,
                     Categoria = TipoLeilao.Demanda,
                     Preco = 2000
                 },
                 new Leilao
                 {
+                    LeilaoId = 2,
                     CategoriaDeLance = TipoLance.Fechado,
                     DataInicio = new DateTime(2020, 6, 1, 7, 47, 0),
-                    DataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
                     IdUsuarioResponsavel = "97974378827",
                     Lote = lote2,
-                    Lances = lance2,
+                    Lances = lances2,
                     Categoria = TipoLeilao.Oferta,
                     Preco = 300,
                 },
                 new Leilao
                 {
+                    LeilaoId = 3,
                     CategoriaDeLance = TipoLance.Aberto,
                     DataInicio = new DateTime(2020, 6, 1, 7, 47, 0),
-                    DataFinal = new DateTime(2020, 6, 1, 7, 47, 0),
                     IdUsuarioResponsavel = "67456378829",
                     Lote = lote3,
-                    Lances = lance3,
+                    Lances = lances3,
                     Categoria = TipoLeilao.Oferta,
                     Preco = 500,
                 },
@@ -424,4 +377,3 @@ namespace TF_PSA
         }
     }
 }
- 

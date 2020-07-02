@@ -14,6 +14,7 @@
         <div class="w-25 card">
             <div class="card-body">
                 <h4 class="card-title">Leilão @Html.DisplayFor(modelItem => item.LeilaoId) </h4>
+                <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.Lote)" >
                 <h6 class="card-subtitle mb-2 text-muted">por @Html.DisplayFor(modelItem => item.IdUsuarioResponsavel) em @Html.DisplayFor(modelItem => item.DataInicio)</h6>
                 <p class="card-text">
                     @Html.DisplayFor(modelItem => item.Categoria)

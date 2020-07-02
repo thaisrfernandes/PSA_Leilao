@@ -46,7 +46,8 @@
                 @Html.DisplayFor(modelItem => item.Categoria)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Imagem)
+                <img src="@Html.DisplayFor(modelItem => item.Imagem)" width="30" height="30" />
+                <!--@Html.DisplayFor(modelItem => item.Imagem)-->
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ItemId">Edit</a> |
