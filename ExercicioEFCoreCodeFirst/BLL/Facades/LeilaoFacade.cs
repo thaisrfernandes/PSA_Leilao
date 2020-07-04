@@ -57,11 +57,16 @@ namespace TF_PSA.BLL.Facades
 
             if (TipoLeilao.Demanda == leilao.Categoria)
             {
+
                 Console.WriteLine("leilao de demanda");
                 Lance lanceGanhador = lances
+                    .OrderByDescending(l => l.Valor)
                     .Where(l => l.LeilaoId == leilao.LeilaoId)
+                    .Where(l => l.Valor > leilao.Preco)
                     .FirstOrDefault();
+                    
 
+                //Console.WriteLine(leilao.Preco);
                 Console.WriteLine(lanceGanhador.ToString());
 
                 return lanceGanhador;
@@ -70,9 +75,12 @@ namespace TF_PSA.BLL.Facades
             {
                 Console.WriteLine("leilao de oferta");
                 Lance lanceGanhador = lances
+                    .OrderBy(l => l.Valor)
                     .Where(l => l.LeilaoId == leilao.LeilaoId)
+                    .Where(l => l.Valor < leilao.Preco)
                     .FirstOrDefault();
 
+                //Console.WriteLine(leilao.Preco);
                 Console.WriteLine(lanceGanhador.ToString());
 
                 return lanceGanhador;
