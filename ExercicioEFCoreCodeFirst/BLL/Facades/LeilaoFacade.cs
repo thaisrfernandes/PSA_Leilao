@@ -50,24 +50,30 @@ namespace TF_PSA.BLL.Facades
                     .FirstOrDefault();
              */
 
-            var leilaoId = leilao.LeilaoId;
+            //Console.WriteLine(leilao.LeilaoId);
+
+            //var leilaoId = leilao.LeilaoId;
             List<Lance> lances = await new LanceFacade().ListAllLances();
 
             if (TipoLeilao.Demanda == leilao.Categoria)
             {
+                Console.WriteLine("leilao de demanda");
                 Lance lanceGanhador = lances
-                    .Where(l => l.LeilaoId == leilaoId && l.Valor < leilao.Preco)
+                    .Where(l => l.LeilaoId == leilao.LeilaoId)
                     .FirstOrDefault();
+
+                Console.WriteLine(lanceGanhador.ToString());
 
                 return lanceGanhador;
             }
             else
             {
+                Console.WriteLine("leilao de oferta");
                 Lance lanceGanhador = lances
-                    .Where(l => l.LeilaoId == leilaoId && l.Valor < leilao.Preco)
+                    .Where(l => l.LeilaoId == leilao.LeilaoId)
                     .FirstOrDefault();
 
-                Console.WriteLine(lanceGanhador);
+                Console.WriteLine(lanceGanhador.ToString());
 
                 return lanceGanhador;
             }

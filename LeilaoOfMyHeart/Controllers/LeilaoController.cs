@@ -149,11 +149,20 @@ namespace LeilaoOfMyHeart.Controllers
             return _facade.LeilaoExits(id);
         }
 
-        public async Task<IActionResult> SelecionaGanhador(Leilao leilao)
+        public async Task<IActionResult> SelecionaGanhador(int id)
         {
-            Lance lance = await _facade.DeterminaGanhador(leilao);
+            //esta recebendo o id do leilao
+            Console.WriteLine(id);
+            if (_facade.LeilaoExits(id))
+            {
+                Leilao leilao = await _facade.EditLeilao(id);
+                Console.WriteLine(leilao.ToString());
+                Lance lance = await _facade.DeterminaGanhador(leilao);
 
-            return View(lance);
+                return View(lance);
+            }
+
+            return NotFound();
         }
     }
 }
