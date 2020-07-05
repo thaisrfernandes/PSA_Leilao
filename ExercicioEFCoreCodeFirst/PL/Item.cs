@@ -36,5 +36,7 @@ namespace TF_PSA.PL
         [Display(Name = "Imagem do item")]
         [DataType(DataType.Text)]
         public String Imagem { get; set; }
+
+        public int LeilaoId { get; set; }
     }
 }

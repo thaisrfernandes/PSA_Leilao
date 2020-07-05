@@ -28,31 +28,22 @@ namespace TF_PSA.BLL.Facades
         public bool LeilaoExits(int id) => LeilaoDAO.LeilaoExits(id);
         public async Task PutLeilao(Leilao leilao) => await LeilaoDAO.PutLeilao(leilao);
 
+        public async Task<IEnumerable<Item>> GetLeilaoItems(int leilaoId) {
+
+            IEnumerable<Item> itens = await new ItemFacade().ListAllItens();
+            return itens.Where(i => i.LeilaoId == leilaoId);
+
+        }
+
+        public async Task<IEnumerable<Lance>> GetLeilaoLances(int leilaoId)
+        {
+            IEnumerable<Lance> lances = await new LanceFacade().ListAllLances();
+            return lances.Where(l => l.LeilaoId == leilaoId);
+        }
+
         public async Task<Lance> DeterminaGanhador(Leilao leilao)
         {
-            /*
-              var numberOfMoviesAsCharac = from c in db.Characters
-                                                 where c.Character == "James Bond"
-                                                 group c by c.Actor.Name into ActorPlayingChar
-                                                 select new
-                                                 {
-                                                     Name = ActorPlayingChar.Key,
-                                                     Times = ActorPlayingChar.Count()
-                                                 };
-
-                    int maxParticipation = numberOfMoviesAsCharac.Max(i => i.Times);
-                    var chosenOne = numberOfMoviesAsCharac.First(c => c.Times == maxParticipation);
-
-
-            Lance lanceGanhador = GetContext()
-                    .Lances
-                    .Where(l => l.Valor > leilao.Preco)
-                    .FirstOrDefault();
-             */
-
-            //Console.WriteLine(leilao.LeilaoId);
-
-            //var leilaoId = leilao.LeilaoId;
+            
             List<Lance> lances = await new LanceFacade().ListAllLances();
 
             if (TipoLeilao.Demanda == leilao.Categoria)
@@ -64,10 +55,6 @@ namespace TF_PSA.BLL.Facades
                     .Where(l => l.LeilaoId == leilao.LeilaoId)
                     .Where(l => l.Valor > leilao.Preco)
                     .FirstOrDefault();
-                    
-
-                //Console.WriteLine(leilao.Preco);
-                Console.WriteLine(lanceGanhador.ToString());
 
                 return lanceGanhador;
             }
@@ -79,9 +66,6 @@ namespace TF_PSA.BLL.Facades
                     .Where(l => l.LeilaoId == leilao.LeilaoId)
                     .Where(l => l.Valor < leilao.Preco)
                     .FirstOrDefault();
-
-                //Console.WriteLine(leilao.Preco);
-                Console.WriteLine(lanceGanhador.ToString());
 
                 return lanceGanhador;
             }

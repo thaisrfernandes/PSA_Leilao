@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-LeilaoOfMyHeart-351F122A-EFEE-4B8E-B4A5-096DC95FAA23</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\Leilao\ListPorCategoria.cshtml" />
+    <Content Remove="Views\Leilao\ListPorCategoriaLances.cshtml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />

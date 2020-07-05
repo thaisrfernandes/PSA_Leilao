@@ -66,7 +66,7 @@ namespace LeilaoOfMyHeart
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Leilao}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

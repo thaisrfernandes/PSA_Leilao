@@ -1,0 +1,48 @@
+﻿@model IEnumerable<TF_PSA.PL.Leilao>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div style="padding-left: 5%">
+    <h1 class="pb-4 pt-3">Leilões</h1>
+    <div class="card-columns d-flex flex-wrap">
+        @foreach (var item in Model)
+        {
+            <div class="card" style="width: 30%">
+                <div class="card-body">
+
+                    <div class="d-flex align-content-center justify-content-between">
+                        <h4 class="card-title">Leilão @Html.DisplayFor(modelItem => item.LeilaoId)</h4>
+
+                        <div class="d-flex align-items-center justify-content-around">
+                            @if (item.Categoria == TF_PSA.PL.TipoLeilao.Oferta)
+                            {
+                                <div class="badge badge-info m-1">@Html.DisplayFor(modelItem => item.Categoria)</div>
+                            }
+                            else if (item.Categoria == TF_PSA.PL.TipoLeilao.Demanda)
+                            {
+                                <div class="badge badge-success m-1">@Html.DisplayFor(modelItem => item.Categoria)</div>
+                            }
+
+                            @if (item.CategoriaDeLance == TF_PSA.PL.TipoLance.Aberto)
+                            {
+                                <div class="badge badge-dark m-1">@Html.DisplayFor(modelItem => item.CategoriaDeLance)</div>
+                            }
+                            else if (item.CategoriaDeLance == TF_PSA.PL.TipoLance.Fechado)
+                            {
+                                <div class="badge badge-secondary m-1">@Html.DisplayFor(modelItem => item.CategoriaDeLance)</div>
+                            }
+                        </div>
+                    </div>
+
+                    <small class="card-subtitle mb-2 text-muted">por @Html.DisplayFor(modelItem => item.IdUsuarioResponsavel) em @Html.DisplayFor(modelItem => item.DataInicio)</small>
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Details" asp-route-id="@item.LeilaoId" class="ml-1 mr-1 mt-2 w-50 btn btn-sm btn-light text-dark">+ Detalhes</a>
+                        <a asp-action="Create" asp-controller="Lance" asp-route-id="@item.LeilaoId" class="ml-1 mr-1 mt-2 w-50 btn btn-sm btn-outline-primary font-weight-bold">Fazer Lance</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

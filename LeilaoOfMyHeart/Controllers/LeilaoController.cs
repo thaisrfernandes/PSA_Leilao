@@ -149,9 +149,26 @@ namespace LeilaoOfMyHeart.Controllers
             return _facade.LeilaoExits(id);
         }
 
+        public async Task<IActionResult> GetLeilaoItems(int id)
+        {
+            return View( await _facade.GetLeilaoItems(id));
+        }
+
+        public async Task<IActionResult> GetLeilaoLances(int id)
+        {
+            return View(await _facade.GetLeilaoLances(id));
+        }
+
         public async Task<IActionResult> SelecionaGanhador(int id)
         {
             //esta recebendo o id do leilao
+            IEnumerable<Item> itens = await _facade.GetLeilaoItems(id);
+
+            foreach(Item item in itens)
+            {
+                Console.WriteLine(item);
+            }
+
             Console.WriteLine(id);
             if (_facade.LeilaoExits(id))
             {

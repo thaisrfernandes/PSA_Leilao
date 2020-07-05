@@ -18,6 +18,7 @@ namespace TF_PSA.BLL.Facades
         }
 
         public Task<List<Item>> ListAllItens() => ItemDAO.ListAll();
+
         public Task<Item> EditItem(int? ItemId) => ItemDAO.EditById(ItemId);
         public Task<Item> GetItem(int? ItemId) => ItemDAO.GetItem(ItemId);
         public async Task CreateItem(Item item) => await ItemDAO.Create(item);
