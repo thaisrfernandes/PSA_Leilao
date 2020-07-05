@@ -4,55 +4,48 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h3 class="display-4">Leilão @Html.DisplayFor(model => model.LeilaoId) </h3>
 
-<div>
-    <h4>Leilao</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoriaDeLance)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CategoriaDeLance)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Preco)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Preco)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DataInicio)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DataInicio)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DataFinal)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DataFinal)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IdUsuarioResponsavel)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IdUsuarioResponsavel)
-        </dd>
-    </dl>
+<div class="d-flex align-items-center">
+    <div class="card">
+        <div class="card-header d-flex align-content-center">
+            Categorias
+            <div class="d-flex align-items-center justify-content-around ml-3">
+                @if (Model.Categoria == TF_PSA.PL.TipoLeilao.Oferta)
+                {
+                    <div class="badge badge-info m-1">@Html.DisplayFor(modelItem => Model.Categoria)</div>
+                }
+                else if (Model.Categoria == TF_PSA.PL.TipoLeilao.Demanda)
+                {
+                    <div class="badge badge-success m-1">@Html.DisplayFor(modelItem => Model.Categoria)</div>
+                }
+
+                @if (Model.CategoriaDeLance == TF_PSA.PL.TipoLance.Aberto)
+                {
+                    <div class="badge badge-dark m-1">@Html.DisplayFor(modelItem => Model.CategoriaDeLance)</div>
+                }
+                else if (Model.CategoriaDeLance == TF_PSA.PL.TipoLance.Fechado)
+                {
+                    <div class="badge badge-secondary m-1">@Html.DisplayFor(modelItem => Model.CategoriaDeLance)</div>
+                }
+            </div>
+        </div>
+        <div class="p-3 w-75">
+            <p><span class="font-weight-bold">Valor:</span> @Html.DisplayFor(model => model.Preco)</p>
+            <p><span class="font-weight-bold">Usuário Responsável:</span> @Html.DisplayFor(model => model.IdUsuarioResponsavel)</p>
+            <p><span class="font-weight-bold">Data inicial:</span> @Html.DisplayFor(model => model.DataInicio)</p>
+            <p><span class="font-weight-bold">Data final:</span> @Html.DisplayFor(model => model.DataFinal)</p>
+        </div>
+    </div>
+
+    <div class="d-flex flex-column w-25 ml-5">
+        <a asp-action="SelecionaGanhador" asp-route-id="@Model.LeilaoId" class="mr-1 mt-2 w-50 btn btn-sm btn-primary">Descobrir Vencedor</a>
+        <a asp-action="GetLeilaoItems" asp-route-id="@Model.LeilaoId" class="mr-1 mt-2 w-50 btn btn-sm btn-primary">Itens</a>
+        @if (Model.CategoriaDeLance == TF_PSA.PL.TipoLance.Aberto)
+        {
+            <a asp-action="GetLeilaoLances" asp-route-id="@Model.LeilaoId" class="mr-1 mt-2 w-50 btn btn-sm btn-primary">Lances</a>
+        }
+        <a asp-action="Index" asp-route-id="@Model.LeilaoId" class="mr-1 mt-2 w-50 btn btn-sm btn-secondary">Voltar</a>
+    </div>
 </div>
-<div>
-    <a asp-action="SelecionaGanhador" asp-route-id="@Model.LeilaoId">Seleciona Ganhador | </a>
-    <a asp-action="GetLeilaoItems" asp-route-id="@Model.LeilaoId">Itens | </a>
-    @if(Model.CategoriaDeLance == TF_PSA.PL.TipoLance.Aberto) {
-        <a asp-action="GetLeilaoLances" asp-route-id="@Model.LeilaoId">Lances | </a>
-    }
-    <a asp-action="Index">Back to List</a>
-</div>
+

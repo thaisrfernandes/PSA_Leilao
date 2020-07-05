@@ -6,20 +6,26 @@
 }
 
 
-
-@if (Model == null)
-{
-    <h1>Não foi encontrado nenhum vencedor</h1>
-}
-else
-{
-    <h1>Ganhador do Leilao</h1>
-    <div>
-        
-        @Html.DisplayNameFor(modelItem => modelItem.LanceId): <span>@Html.DisplayFor(modelItem => modelItem.LanceId)</span>
+    <div class="jumbotron">
+        @if (Model == null)
+        {
+            <h1 class="display-4">Não foi encontrado nenhum vencedor</h1>
+        }
+        else
+        {
+            <h1 class="display-4">O lance vencedor é...</h1>
+            <div class="d-flex align-items-center">
+                <img src="https://i.imgur.com/NYpgVfS.png" class="m-3">
+                
+                <div>
+                    <p class="lead">
+                        <span class="text-primary">R$ @Html.DisplayFor(modelItem => modelItem.Valor)</span> por <span class="font-weight-bold">@Html.DisplayFor(modelItem => modelItem.EmailUsuario)</span>
+                    </p>
+                    <hr class="my-2" />
+                    <p>
+                        Lance id @Html.DisplayFor(modelItem => modelItem.LanceId) feito em @Html.DisplayFor(modelItem => modelItem.Data)
+                    </p>
+                </div>
+            </div>
+        }
     </div>
-}
-
-<!--
-    <p>@Html.DisplayNameFor(@model => model.Usuario)</p>
--->

@@ -4,51 +4,17 @@
     ViewData["Title"] = "Lances";
 }
 
-<h1>Index</h1>
+<h1>Lances</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Data)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Valor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmailUsuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Leilao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+    <ul class="list-group">
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Valor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmailUsuario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Leilao.LeilaoId)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.LanceId">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.LanceId">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.LanceId">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+            <li class="list-group-item d-flex align-items-center align-content-center justify-content-between">
+                <div class="d-flex align-items-center align-content-center">
+                    <span class="badge badge-primary badge-pill mr-4">R$ @Html.DisplayFor(modelItem => item.Valor)</span>
+                    <span class="font-weight-bold">@Html.DisplayFor(modelItem => item.EmailUsuario)</span> &ensp;em @Html.DisplayFor(modelItem => item.Data)
+                </div>
+                <a class="text-danger font-weight-bold" asp-action="Delete" asp-route-id="@item.LanceId">&times;</a>
+            </li>
+         }
+    </ul>
